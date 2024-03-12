@@ -31,20 +31,12 @@ async function postPredictHandler(request, h) {
 }
 
 async function getPredictHandler(request, h){
-    try {
-        const data = await getData();
+    const data = await getData();
 
-        return h.response({
-            status: 'success',
-            data
-        });
-    } catch (error) {
-        console.error("Error:", error);
-        return h.response({
-            status: 'error',
-            message: 'Failed to retrieve data'
-        }).code(500); // Return 500 status code for internal server error
-    }
+    return h.response({
+        status: 'success',
+        data
+    });
 }
  
 module.exports = { postPredictHandler, getPredictHandler };
