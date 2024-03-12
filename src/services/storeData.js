@@ -9,8 +9,14 @@ async function storeData(id, data) {
  
 async function getData(){
     const db = new Firestore();
-
     const predictCollection = db.collection('prediction');
-    return predictCollection.get();
+    const querySnapshot = await predictCollection.get();
+
+    const data = [];
+    querySnapshot.forEach(doc => {
+        data.push(doc.data());
+    });
+
+    return data;
 }
 module.exports = { storeData, getData };
