@@ -16,21 +16,25 @@ async function predictClassification(model, image) {
         const confidenceScore = Math.max(...score) * 100;
  
         const classResult = tf.argMax(prediction, 1).dataSync()[0];
-        const label = classes[classResult];
+        const result = classes[classResult];
  
         let explanation, suggestion;
+        let label = "Non-cancer"
  
-        if(label === 'Melanocytic nevus') {
+        if(result === 'Melanocytic nevus') {
+            label = "Cancer";
             explanation = "Melanocytic nevus adalah kondisi di mana permukaan kulit memiliki bercak warna yang berasal dari sel-sel melanosit, yakni pembentukan warna kulit dan rambut."
             suggestion = "Segera konsultasi dengan dokter terdekat jika ukuran semakin membesar dengan cepat, mudah luka atau berdarah."
         }
  
-        if(label === 'Squamous cell carcinoma') {
+        if(result === 'Squamous cell carcinoma') {
+            label = "Cancer";
             explanation = "Squamous cell carcinoma adalah jenis kanker kulit yang umum dijumpai. Penyakit ini sering tumbuh pada bagian-bagian tubuh yang sering terkena sinar UV."
             suggestion = "Segera konsultasi dengan dokter terdekat untuk meminimalisasi penyebaran kanker."
         }
  
-        if(label === 'Vascular lesion') {
+        if(result === 'Vascular lesion') {
+            label = "Cancer";
             explanation = "Vascular lesion adalah penyakit yang dikategorikan sebagai kanker atau tumor di mana penyakit ini sering muncul pada bagian kepala dan leher."
             suggestion = "Segera konsultasi dengan dokter terdekat untuk mengetahui detail terkait tingkat bahaya penyakit."
         
