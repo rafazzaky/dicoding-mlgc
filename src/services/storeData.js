@@ -7,4 +7,10 @@ async function storeData(id, data) {
   return predictCollection.doc(id).set(data);
 }
  
-module.exports = storeData;
+async function getData(){
+    const db = new Firestore();
+
+    const predictCollection = db.collection('prediction');
+    return predictCollection.get();
+}
+module.exports = { storeData, getData };
